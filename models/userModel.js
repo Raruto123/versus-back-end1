@@ -31,6 +31,9 @@ const userSchema = new mongoose.Schema({
     emailVerified : {
         type : Boolean,
         default : false
+    },
+    votes : {
+        type : [String]
     }
 },
 {
