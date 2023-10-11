@@ -1,4 +1,0 @@
-# des informations qui ne sortiront jamais de chez vous ça n'ira pas sur git
-
-/config/.env
-/node_modules
