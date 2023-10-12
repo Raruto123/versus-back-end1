@@ -94,3 +94,26 @@ module.exports.logout = async(req, res) => {
     res.cookie("jwtoken", "", {maxAge : 1, httpOnly : true, sameSite : "none", secure : true});
     res.status(400).json({message : "Déconnexion réussie"});
 }
+
+
+//avoir les informations sur l'utilisateur
+module.exports.getUser = async(req, res) => {
+    console.log(req.params.id);
+    try {
+        const docs = await userModel.findById(req.params.id);
+        res.status(200).send({docs});
+        console.log(res.data);
+    } catch (error) {
+        console.log("ID Inconnu :", error);
+    }
+}
+
+//avoir les informations de tous les utilisateurs
+module.exports.getAllUsers = async(req, res) => {
+    try {
+        const users = await userModel.find().select("-password");
+        res.status(200).json({users});
+    } catch (error) {
+        res.status(400).json(error);
+    }
+}

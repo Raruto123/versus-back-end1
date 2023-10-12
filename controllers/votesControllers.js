@@ -50,3 +50,14 @@ module.exports.devote = async(req, res) => {
         res.status(500).send({message : error})
     }
 }
+
+//obtenir les informations tels que le nombre de voix
+module.exports.getVoteInformation = async(req, res) => {
+
+    try {
+        const choices = await voteModel.find().sort({createdAt : -1});
+        res.status(200).json(choices);
+    } catch (error) {
+        res.status(400).json(error);
+    }
+}
