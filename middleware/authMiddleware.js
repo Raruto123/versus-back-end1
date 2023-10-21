@@ -25,6 +25,7 @@ module.exports.checkUser = (req, res, next) => {
 
 // Pour se connecter automatiquement s'il a déjà été connecté auparavant
 module.exports.requireAuth = (req, res, next) => {
+    console.log("Route GET /jwtid reached");
     const token = req.cookies.jwtoken;
     if (token) {
         jwt.verify(token, process.env.TOKEN_SECRET, (err, decodedToken) => {

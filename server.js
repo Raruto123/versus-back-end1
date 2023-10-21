@@ -8,7 +8,9 @@ const userRoutes = require("./routes/userRoutes.js");
 const votesRoutes = require("./routes/votesRoutes.js");
 const linkRoute = require("./routes/linkRoute.js");
 const {checkUser} = require("./middleware/authMiddleware.js");
-const {requireAuth} = require("./middleware/authMiddleware.js")
+const {requireAuth} = require("./middleware/authMiddleware.js");
+const cors = require("cors");
+
 
 const port = process.env.PORT;
 
@@ -16,6 +18,16 @@ const port = process.env.PORT;
 app.use(bodyParser.json());//pour lire req.body
 app.use(bodyParser.urlencoded({extended : true}));//pour lire req.params
 app.use(cookieParser());//pour lire req.cookies
+const corsOptions = {
+    origin : "http://localhost:3000",
+    credentials : true,
+    "allowedHeaders" : ["sessionId", "Content-Type"],
+    "exposedHeaders" : ["sessionId"],
+    "methods" : "GET, HEAD, PUT, PATCH, POST, DELETE",
+    "preflightContinue" : false
+};
+app.use(cors(corsOptions));
+
 
 //jwt
 app.get("*", checkUser);

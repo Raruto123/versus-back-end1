@@ -111,8 +111,8 @@ module.exports.getUser = async(req, res) => {
 //avoir les informations de tous les utilisateurs
 module.exports.getAllUsers = async(req, res) => {
     try {
-        const users = await userModel.find().select("-password");
-        res.status(200).json({users});
+        const users3 = await userModel.find().select("-password");
+        res.status(200).json({users3});
     } catch (error) {
         res.status(400).json(error);
     }

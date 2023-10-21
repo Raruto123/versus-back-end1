@@ -1,8 +1,13 @@
-import {applyMiddleware, legacy_createStore as createStore, legacy_createStore} from "redux";
+import {applyMiddleware, legacy_createStore} from "redux";
 import thunk from "redux-thunk";
-import rootReducer from "./rootReducer.js";
+import {rootReducer} from "./rootReducer";
+import { getUsers } from "./actions/usersAction.js";
+import { getVotes } from "./actions/votesAction.js";
 
 //dev tools
 import {composeWithDevTools} from "@redux-devtools/extension";
 
-export const store = legacy_createStore(rootReducer, composeWithDevTools(thunk));
+export const store = legacy_createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
+
+store.dispatch(getUsers());
+store.dispatch(getVotes());
